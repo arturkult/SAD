@@ -1,0 +1,13 @@
+<div *ngIf="form">
+  <form [formGroup]="form">
+    <div>
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" formControlName="email" />
+    </div>
+    <div>
+      <label for="password">Hasło</label>
+      <input id="password" type="password" name="password" formControlName="password" />
+      <button (click)="onSubmit()">Zaloguj</button>
+    </div>
+  </form>
+</div>
