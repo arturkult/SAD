@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SAD;
 
 namespace SAD.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191130190445_AddFullNameToUser")]
+    partial class AddFullNameToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,6 +146,8 @@ namespace SAD.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FullName");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -185,33 +189,15 @@ namespace SAD.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("CardOwnerId");
-
                     b.Property<string>("SerialNumber");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CardOwnerId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Cards");
-                });
-
-            modelBuilder.Entity("SAD.Model.CardOwner", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FullName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CardOwners");
                 });
 
             modelBuilder.Entity("SAD.Model.CardRoom", b =>
@@ -236,11 +222,7 @@ namespace SAD.Migrations
 
                     b.Property<string>("Number");
 
-                    b.Property<Guid?>("OwnerId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("Rooms");
                 });
@@ -292,10 +274,6 @@ namespace SAD.Migrations
 
             modelBuilder.Entity("SAD.Model.Card", b =>
                 {
-                    b.HasOne("SAD.Model.CardOwner")
-                        .WithMany("Cards")
-                        .HasForeignKey("CardOwnerId");
-
                     b.HasOne("SAD.Model.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -312,13 +290,6 @@ namespace SAD.Migrations
                         .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SAD.Model.Room", b =>
-                {
-                    b.HasOne("SAD.Model.CardOwner", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId");
                 });
 #pragma warning restore 612, 618
         }

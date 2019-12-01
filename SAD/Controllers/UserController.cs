@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SAD.Model;
 using SAD.Services;
 using SAD.ViewModel;
 using System;
@@ -15,11 +18,13 @@ namespace SAD.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UserController(IConfiguration configuration, IUserService userService)
+        public UserController(IConfiguration configuration, IUserService userService, IMapper mapper)
         {
             _configuration = configuration;
             _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpPost("login")]
@@ -39,6 +44,25 @@ namespace SAD.Controllers
             return Ok(new {
                 Token = result
             });
+        }
+
+        [HttpGet()]
+        public IActionResult GetAll()
+        {
+            return Ok(_userService.GetAll().ProjectTo<UserVM>(_mapper.ConfigurationProvider));
+        }
+
+        [HttpPost()]
+        public IActionResult Save(UserVM user)
+        {
+            _userService.Add(_mapper.Map<CardOwner>(user));
+            return Ok();
+        }
+        [HttpPut()]
+        public IActionResult Update(UserVM user)
+        {
+            _userService.Update(_mapper.Map<CardOwner>(user));
+            return Ok();
         }
     }
 }

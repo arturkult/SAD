@@ -10,5 +10,6 @@ namespace SAD.Model
         public Guid Id { get; set; }
         public string Number { get; set; }
         public int Floor { get; set; }
+        public CardOwner Owner { get; set; }
     }
 }

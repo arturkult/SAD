@@ -14,6 +14,10 @@ namespace SAD.AutoMapper
         {
             CreateMap<Room, RoomVM>();
             CreateMap<RoomVM, Room>();
+            CreateMap<CardOwner, UserVM>()
+                .ForMember(dst => dst.CardsNumber, opt => opt.MapFrom(src => 0));
+            CreateMap<UserVM, CardOwner>()
+                .ForSourceMember(src => src.CardsNumber, opt => opt.DoNotValidate());
         }
     }
 }

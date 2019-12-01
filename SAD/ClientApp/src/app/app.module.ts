@@ -13,6 +13,9 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { AuthService } from './auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthGuardService } from './auth-guard.service';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { AuthGuardService } from './auth-guard.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    UserListComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,13 +36,17 @@ import { AuthGuardService } from './auth-guard.service';
     RouterModule.forRoot([
       { path: 'login', component: LoginFormComponent },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
+      { path: 'users', component: UserListComponent, canActivate: [AuthGuardService] },
+      { path: 'users/form', component: UserFormComponent, canActivate: [AuthGuardService] },
+      { path: 'users/form/:id', component: UserFormComponent, canActivate: [AuthGuardService] },
       { path: '*', redirectTo: 'home' }
     ])
   ],
   providers: [
     AuthService,
     JwtHelperService,
-    AuthGuardService
+    AuthGuardService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
