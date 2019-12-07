@@ -7,6 +7,7 @@ namespace SAD
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<CardOwner> CardOwners { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<CardRoom> CardRoom { get; set; }
 

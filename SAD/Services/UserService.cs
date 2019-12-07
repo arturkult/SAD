@@ -18,21 +18,46 @@ namespace SAD.Services
     public interface IUserService
     {
         string Login(LoginVM user);
+        void Add(CardOwner user);
+        void Update(CardOwner user);
+        void Delete(Guid userId);
+        IQueryable<CardOwner> GetAll();
     }
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
 
         public UserService(IUserRepository userRepository,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            ApplicationDbContext context)
         {
             _userRepository = userRepository;
             _configuration = configuration;
             _signInManager = signInManager;
+            _context = context;
         }
+
+        public void Add(CardOwner user)
+        {
+            _userRepository.Add(user);
+            _context.SaveChanges();
+        }
+
+        public void Delete(Guid userId)
+        {
+            _userRepository.Delete(userId);
+            _context.SaveChanges();
+        }
+
+        public IQueryable<CardOwner> GetAll()
+        {
+            return _userRepository.GetAll();
+        }
+
         public string Login(LoginVM user)
         {
             var userFromDb = _userRepository.GetUserByEmail(user.Email);
@@ -46,6 +71,13 @@ namespace SAD.Services
             }
             return string.Empty;
         }
+
+        public void Update(CardOwner user)
+        {
+            _userRepository.Update(user);
+            _context.SaveChanges();
+        }
+
         private string GenerateToken()
         {
             var securitySection = _configuration.GetSection("Security").Get<SecuritySection>();

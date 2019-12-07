@@ -1,0 +1,26 @@
+<div class="form-group">
+  <form [formGroup]="form" (submit)="save()">
+    <input type="text" hidden formControlName="id"/>
+    <div class="row">
+      <label for="email">Email</label>
+      <input class="form-control" type="text" formControlName="email" name="email"/>
+      <div *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)"
+           class="alert alert-danger">
+        <span *ngIf="form.controls.email.errors.required">To pole jest wymagane</span>
+        <span *ngIf="form.controls.email.errors.email">Niepoprawny email</span>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-form-label" for="email">Imię i nazwisko</label>
+      <input class="form-control" type="text" formControlName="fullName" name="fullName" />
+      <div *ngIf="form.controls.fullName.invalid && (form.controls.fullName.dirty || form.controls.fullName.touched)"
+           class="alert alert-danger">
+        <span *ngIf="form.controls.fullName.errors.required">To pole jest wymagane</span>
+      </div>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-primary">Zapisz</button>
+      <button type="button" (click)="reset()" class="btn btn-secondary">Anuluj</button>
+    </div>
+  </form>
+</div>
