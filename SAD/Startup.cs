@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using SAD.AutoMapper;
 using SAD.DbContext;
 using SAD.Helpers;
+using SAD.Hubs;
 using SAD.Model;
 using SAD.Repository;
 using SAD.Services;
@@ -42,6 +43,7 @@ namespace SAD
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddSignalR();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -126,6 +128,11 @@ namespace SAD
                     template: "{controller}/{action=Index}/{id?}");
             });
 
+            app.UseSignalR(opt =>
+            {
+                opt.MapHub<AuditLogHub>("/hub/audit-log");
+            });
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -144,6 +151,7 @@ namespace SAD
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
             services.AddScoped<ICardRepository, CardRepository>();
+            services.AddScoped<IAuditLogRepository, AuditLogRepository>();
         }
 
         private void RegisterServices(IServiceCollection services)
@@ -151,6 +159,7 @@ namespace SAD
             services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IAuditLogService, AuditLogService>();
         }
 
     }

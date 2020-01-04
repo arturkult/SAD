@@ -18,6 +18,7 @@ namespace SAD.AutoMapper
                 .ForMember(dst => dst.CardsNumber, opt => opt.MapFrom(src => 0));
             CreateMap<UserVM, CardOwner>()
                 .ForSourceMember(src => src.CardsNumber, opt => opt.DoNotValidate());
+            CreateMap<AuditLog, AuditLogVM>();
         }
     }
 }

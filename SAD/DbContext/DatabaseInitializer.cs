@@ -39,6 +39,12 @@ namespace SAD.DbContext
                     UserName = "Administrator"
                 };
                 await _userManager.CreateAsync(user, "1qaz@WSX");
+                _context.CardOwners.Add(new CardOwner
+                {
+                    Email = user.Email,
+                    FullName = "Admin Adminkowski"
+                });
+                await _context.SaveChangesAsync();
             }
             try
             {
@@ -116,7 +122,7 @@ namespace SAD.DbContext
                     var card = new Card()
                     {
                         SerialNumber = splittedText[0],
-                        User = _context.Users.FirstOrDefault(user => user.Email.Equals(splittedText[1]))
+                        CardOwner = _context.CardOwners.FirstOrDefault(user => user.Email.Equals(splittedText[1]))
                     };
                     await _context.Cards.AddAsync(card);
 

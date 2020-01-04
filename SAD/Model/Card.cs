@@ -9,7 +9,7 @@ namespace SAD.Model
     {
         public Guid Id { get; set; }
         public string SerialNumber { get; set; }
-        public ApplicationUser User { get; set; }
+        public CardOwner CardOwner { get; set; }
         public virtual List<CardRoom> AllowedRooms { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+<div>
+  <table class="table">
+    <tr class="thead-light">
+      <th>
+        Data
+      </th>
+      <th>
+        Użytkownik
+        <input class="form-control" type="text" (change)="change($event)" name="userFullName" placeholder="Szukaj" />
+      </th>
+      <th>
+        Numer pomieszczenia
+        <input class="form-control" type="text" (change)="change($event)" name="roomNumber" placeholder="Szukaj" />
+      </th>
+      <th>
+        Wynik
+        <select class="form-control" (change)="change($event)" name="result">
+          <option [value]="null">Wybierz wynik</option>
+          <option value="true">Akceptacja</option>
+          <option value="false">Odrzucenie</option>
+        </select>
+      </th>
+    </tr>
+    <tr *ngFor="let auditLog of list | async">
+      <td>{{auditLog.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{auditLog.userFullName}}</td>
+      <td>{{auditLog.roomNumber}}</td>
+      <td style.backgroundColor="{{auditLog.result ? 'green' : 'red'}}">
+        {{auditLog.result ? 'Akceptacja' : 'Odrzucenie'}}
+      </td>
+    </tr>
+  </table>
+</div>

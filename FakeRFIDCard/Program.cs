@@ -35,9 +35,9 @@ namespace FakeRFIDCard
         public static void SendRequestsAsCard(string cardId, string[] rooms)
         {
             Random randomizer = new Random();
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < 50; i++)
             {
-                var sleepTime = randomizer.Next(1, 10);
+                var sleepTime = randomizer.Next(5, 30);
                 var roomIndex = randomizer.Next(rooms.Length);
                 var requestBody = new RequestVM
                 {

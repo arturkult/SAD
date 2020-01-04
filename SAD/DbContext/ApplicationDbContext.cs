@@ -10,6 +10,7 @@ namespace SAD
         public DbSet<CardOwner> CardOwners { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<CardRoom> CardRoom { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {

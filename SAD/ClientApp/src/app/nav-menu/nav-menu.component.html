@@ -15,7 +15,10 @@
             <a class="nav-link text-dark" [routerLink]='["/users"]'>Użytkownicy</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/live"]'>Podgląd na żywo</a>
+            <a class="nav-link text-dark" [routerLink]='["/audit-logs/live"]'>Podgląd na żywo</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+            <a class="nav-link text-dark" [routerLink]='["/audit-logs/list"]'>Dziennik zdarzeń</a>
           </li>
           <li class="nav-item nav-clicable-item" *ngIf="isUserLoggedIn">
             <a class="nav-link text-dark" (click)="logout()">Wyloguj</a>

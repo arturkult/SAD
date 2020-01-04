@@ -1,0 +1,18 @@
+<div>
+  <table class="table">
+    <tr class="thead-light">
+      <th>Data</th>
+      <th>Użytkownik</th>
+      <th>Numer pomieszczenia</th>
+      <th>Wynik</th>
+    </tr>
+    <tr *ngFor="let auditLog of list">
+      <td>{{auditLog.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{auditLog.userFullName}}</td>
+      <td>{{auditLog.roomNumber}}</td>
+      <td style.backgroundColor="{{auditLog.result ? 'green' : 'red'}}">
+        {{auditLog.result ? 'Akceptacja' : 'Odrzucenie'}}
+      </td>
+    </tr>
+  </table>
+</div>
