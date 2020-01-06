@@ -19,6 +19,11 @@ import { UserService } from './user.service';
 import { AuditLogListComponent } from './audit-log-list/audit-log-list.component';
 import { AuditLogLiveComponent } from './audit-log-live/audit-log-live.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RoomListComponent } from './room-list/room-list.component';
+import { RoomFormComponent } from './room-form/room-form.component';
+import { RoomService } from './room.service';
+import { CardFormComponent } from './card-form/card-form.component';
+import { CardListComponent } from './card-list/card-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserListComponent,
     UserFormComponent,
     AuditLogListComponent,
-    AuditLogLiveComponent
+    AuditLogLiveComponent,
+    RoomListComponent,
+    RoomFormComponent,
+    CardFormComponent,
+    CardListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,13 +50,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatPaginatorModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
+      { path: '', component: HomeComponent },
       { path: 'login', component: LoginFormComponent },
-      { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
       { path: 'users', component: UserListComponent, canActivate: [AuthGuardService] },
       { path: 'users/form', component: UserFormComponent, canActivate: [AuthGuardService] },
       { path: 'users/form/:id', component: UserFormComponent, canActivate: [AuthGuardService] },
       { path: 'audit-logs/list', component: AuditLogListComponent, canActivate: [AuthGuardService] },
       { path: 'audit-logs/live', component: AuditLogLiveComponent, canActivate: [AuthGuardService] },
+      { path: 'rooms', component: RoomListComponent, canActivate: [AuthGuardService] },
+      { path: 'rooms/form', component: RoomFormComponent, canActivate: [AuthGuardService] },
+      { path: 'rooms/form/:id', component: RoomFormComponent, canActivate: [AuthGuardService] },
+      { path: 'cards', component: CardListComponent, canActivate: [AuthGuardService] },
+      { path: 'cards/form', component: CardFormComponent, canActivate: [AuthGuardService] },
+      { path: 'cards/form/:id', component: CardFormComponent, canActivate: [AuthGuardService] },
       { path: '*', redirectTo: 'home' }
     ])
   ],
@@ -55,7 +70,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthService,
     JwtHelperService,
     AuthGuardService,
-    UserService
+    UserService,
+    RoomService
   ],
   bootstrap: [AppComponent]
 })

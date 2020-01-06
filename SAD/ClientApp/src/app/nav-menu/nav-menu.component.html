@@ -8,16 +8,19 @@
       </button>
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' *ngIf="isUserLoggedIn">
             <a class="nav-link text-dark" [routerLink]='["/rooms"]'>Pomieszczenia</a>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' *ngIf="isUserLoggedIn">
             <a class="nav-link text-dark" [routerLink]='["/users"]'>Użytkownicy</a>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' *ngIf="isUserLoggedIn">
+            <a class="nav-link text-dark" [routerLink]='["/cards"]'>Karty</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' *ngIf="isUserLoggedIn">
             <a class="nav-link text-dark" [routerLink]='["/audit-logs/live"]'>Podgląd na żywo</a>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' *ngIf="isUserLoggedIn">
             <a class="nav-link text-dark" [routerLink]='["/audit-logs/list"]'>Dziennik zdarzeń</a>
           </li>
           <li class="nav-item nav-clicable-item" *ngIf="isUserLoggedIn">

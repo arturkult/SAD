@@ -22,9 +22,8 @@ export class AuthService {
     return this.http.post(`${this.url}/login`, user)
       .subscribe(
         (result: { token: string } ) => {
-          console.log(result);
           sessionStorage.setItem("jwt", result.token);
-          this.router.navigateByUrl("home");
+          this.router.navigateByUrl("audit-logs/live");
         },
         (error) => {
           console.error(error);

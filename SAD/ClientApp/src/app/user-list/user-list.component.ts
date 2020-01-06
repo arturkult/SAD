@@ -20,6 +20,6 @@ export class UserListComponent implements OnInit {
   }
 
   block(userId: string) {
-    console.log(userId);
+    this.userService.block(userId).subscribe(() => this.userService.refresh());
   }
 }

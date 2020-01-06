@@ -64,5 +64,11 @@ namespace SAD.Controllers
             _userService.Update(_mapper.Map<CardOwner>(user));
             return Ok();
         }
+        [HttpPost("block/{id}")]
+        public IActionResult Block(string id)
+        {
+            _userService.Block(id);
+            return Ok();
+        }
     }
 }

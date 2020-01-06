@@ -1,4 +1,5 @@
-﻿using SAD.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using SAD.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,8 @@ namespace SAD.Repository
 
         public IQueryable<CardOwner> GetAll()
         {
-            return _context.CardOwners;
+            return _context.CardOwners
+                .Include(i=>i.Cards);
         }
 
         public ApplicationUser GetUserByEmail(string email)

@@ -1,0 +1,21 @@
+<h2 class="text-center">Pomieszczenia</h2>
+<div>
+  <button class="btn btn-primary" [routerLink]='["/rooms/form"]'>Dodaj</button>
+  <table class="table">
+    <tr class="thead-light">
+      <th>Numer</th>
+      <th>Piętro</th>
+      <th>Ilość kart</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let room of rooms$ | async">
+      <td>{{room.number}}</td>
+      <td>{{room.floor}}</td>
+      <td>{{room.cardsNumber}}</td>
+      <td>
+        <button class="btn btn-primary" [routerLink]="['/rooms/form', room.id]">Edytuj</button>
+        <button class="btn btn-danger" (click)="block(room.id)">Zablokuj</button>
+      </td>
+    </tr>
+  </table>
+</div>

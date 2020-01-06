@@ -18,7 +18,6 @@ export class UserFormComponent implements OnInit {
     private userService: UserService) {
     this.activatedRoute.params.subscribe(params => {
       if (params['id']) {
-        console.log(params['id']);
         this.userService.getById(params['id']).subscribe(
           (result: User[]) => {
             this.initForm(result[0]);

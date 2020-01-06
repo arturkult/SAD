@@ -1,0 +1,50 @@
+<div class="form-group">
+  <form [formGroup]="form">
+    <input type="hidden" name="id" formControlName="id"/>
+    <div class="row">
+      <label class="col-form-label" for="serialNumber">Numer karty</label>
+      <input class="form-control" type="text" name="serialNumber" formControlName="serialNumber" />
+      <div *ngIf="form.controls.serialNumber.invalid && (form.controls.serialNumber.dirty || form.controls.serialNumber.touched)"
+           class="alert alert-danger">
+        <span *ngIf="form.controls.serialNumber.errors.required">To pole jest wymagane</span>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-form-label" for="cardOwner">Użytkownik</label>
+      <select class="form-control" formControlName="cardOwnerId">
+        <option [ngValue]=null>Wybierz</option>
+        <option *ngFor="let user of users$ | async" [value]="user.id" [ngValue]="user.id">{{user.fullName}}</option>
+      </select>
+      <div *ngIf="form.controls.cardOwnerId.invalid && (form.controls.cardOwnerId.dirty || form.controls.cardOwnerId.touched)"
+           class="alert alert-danger">
+        <span *ngIf="form.controls.cardOwnerId.errors.required">To pole jest wymagane</span>
+      </div>
+    </div>
+
+    <h3>Uprawnienia</h3>
+    <div class="row">
+      <div class="col-md-8">
+        <select class="form-control" #roomSelect>
+          <option [value]="null" selected>Wybierz pomieszczenie</option>
+          <option *ngFor="let room of rooms$ | async" [value]="room.id" change>{{room.number}}(piętro {{room.floor}})</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-primary" (click)="addRoom(roomSelect.value)">Dodaj</button>
+      </div>
+    </div>
+    <h4>Dodane pomieszczenia</h4>
+    <ul>
+      <li *ngFor="let room of allowedRooms" class="row">
+        <span class="col-md-8">{{room.roomNumber}}</span>
+        <div class="col-md-4">
+          <button class="btn btn-danger" (click)="removeRoom(room.roomId)">Usuń</button>
+        </div>
+      </li>
+    </ul>
+    <div class="row">
+      <button type="button" (click)="save()" class="btn btn-primary">Zapisz</button>
+      <button type="button" (click)="initForm()" class="btn btn-secondary">Anuluj</button>
+    </div>
+  </form>
+</div>

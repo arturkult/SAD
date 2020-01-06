@@ -48,4 +48,8 @@ export class UserService {
         this.refresh();
       }));;
   }
+
+  block(id: string) {
+    return this.http.post(`${this.url}/block/${id}`, null);
+  }
 }

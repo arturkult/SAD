@@ -1,0 +1,25 @@
+<div class="form-group">
+  <form [formGroup]="form" (submit)="save()" >
+    <input type="text" hidden formControlName="id" />
+    <div class="row">
+      <label for="number">Numer</label>
+      <input class="form-control" type="text" formControlName="number" name="number"/>
+      <div *ngIf="form.controls.number.invalid && (form.controls.number.dirty || form.controls.number.touched)"
+           class="alert alert-danger">
+        <span *ngIf="form.controls.number.errors.required">To pole jest wymagane</span>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-form-label" for="floor">Piętro</label>
+      <input class="form-control" type="text" formControlName="floor" name="floor" />
+      <div *ngIf="form.controls.floor.invalid && (form.controls.floor.dirty || form.controls.floor.touched)"
+           class="alert alert-danger">
+        <span *ngIf="form.controls.floor.errors.required">To pole jest wymagane</span>
+      </div>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-primary">Zapisz</button>
+      <button type="button" (click)="initForm()" class="btn btn-secondary">Anuluj</button>
+    </div>
+  </form>
+</div>

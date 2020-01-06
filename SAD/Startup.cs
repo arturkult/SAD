@@ -160,6 +160,7 @@ namespace SAD
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IAuditLogService, AuditLogService>();
+            services.AddScoped<ICardService, CardService>();
         }
 
     }

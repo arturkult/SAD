@@ -14,6 +14,7 @@ namespace SAD.Services
         Guid Add(Room entity);
         Guid Update(Room entity);
         void Delete(Room entity);
+        void Block(string id);
         bool CheckAccess(RequestVM request);
     }
     public class RoomService : IRoomService
@@ -36,6 +37,13 @@ namespace SAD.Services
             _roomRepository.Add(entity);
             _context.SaveChanges();
             return entity.Id;
+        }
+
+        public void Block(string id)
+        {
+            var guidId = Guid.Parse(id);
+            _context.CardRoom.RemoveRange(_context.CardRoom.Where(cr => cr.RoomId.Equals(guidId)));
+            _context.SaveChanges();
         }
 
         public bool CheckAccess(RequestVM request)

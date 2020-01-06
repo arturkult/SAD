@@ -1,4 +1,5 @@
-﻿using SAD.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using SAD.Model;
 using System;
 using System.Linq;
 
@@ -37,7 +38,10 @@ namespace SAD.Repository
 
         public IQueryable<Card> GetAll()
         {
-            return _context.Cards;
+            return _context.Cards
+                .Include(i => i.CardOwner)
+                .Include(i => i.AllowedRooms)
+                    .ThenInclude(i => i.Room);
         }
 
         public Card GetById(string id)

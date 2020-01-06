@@ -1,0 +1,18 @@
+<div>
+  <button class="btn btn-primary" [routerLink]='["/cards/form"]'>Dodaj</button>
+  <table class="table">
+    <tr class="thead-light">
+      <th>Numer seryjny</th>
+      <th>Właściciel</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let card of cards$ | async">
+      <td>{{card.serialNumber}}</td>
+      <td>{{card.cardOwnerFullName}}</td>
+      <td>
+        <button class="btn btn-primary" [routerLink]="['/cards/form', card.id]">Edytuj</button>
+        <button class="btn btn-danger" (click)="block(card.id)">Zablokuj</button>
+      </td>
+    </tr>
+  </table>
+</div>

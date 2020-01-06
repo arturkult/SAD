@@ -21,6 +21,7 @@ namespace SAD.Services
         void Add(CardOwner user);
         void Update(CardOwner user);
         void Delete(Guid userId);
+        void Block(string id);
         IQueryable<CardOwner> GetAll();
     }
     public class UserService : IUserService
@@ -44,6 +45,13 @@ namespace SAD.Services
         public void Add(CardOwner user)
         {
             _userRepository.Add(user);
+            _context.SaveChanges();
+        }
+
+        public void Block(string id)
+        {
+            var guidId = Guid.Parse(id);
+            _context.CardRoom.RemoveRange(_context.CardRoom.Where(cr => cr.Card.CardOwner.Id.Equals(guidId)));
             _context.SaveChanges();
         }
 
@@ -88,10 +96,10 @@ namespace SAD.Services
                 issuer: securitySection.Issuer,
                 audience: securitySection.Audience,
                 claims: new List<Claim>(),
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddMinutes(15),
                 signingCredentials: signingCredentials
                 );
-             
+
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
     }

@@ -38,6 +38,29 @@ namespace SAD.Controllers
                 .ProjectTo<RoomVM>(_mapper.ConfigurationProvider)
                 .ToList();
         }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Insert(RoomVM room)
+        {
+            var r = _mapper.Map<Room>(room);
+            _roomService.Add(r);
+            return Ok(r.Id);
+        }
+
+        [HttpPut]
+        [Authorize]
+        public IActionResult Update(RoomVM room)
+        {
+            _roomService.Update(_mapper.Map<Room>(room));
+            return Ok();
+        }
+
+        [HttpPost("block/{id}")]
+        public IActionResult Block(string id)
+        {
+            _roomService.Block(id);
+            return Ok();
+        }
 
         [HttpPost("check")]
         public IActionResult CheckAccess(RequestVM request)
