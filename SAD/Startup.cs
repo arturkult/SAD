@@ -98,7 +98,6 @@ namespace SAD
                    .AllowAnyMethod()
                    .AllowCredentials()
                    .Build();
-
                });
            });
         }
@@ -117,10 +116,10 @@ namespace SAD
                 app.UseHsts();
             }
             app.UseAuthentication();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseCors("EnableCors");
+            //app.UseCors("EnableCors");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -38,7 +38,8 @@ export class AuditLogListComponent implements OnInit {
     );
   }
   ngOnInit() {
-  }
+    console.log("aaa");
+   }
 
   change(e) {
     this.filterParams[e.target.name] = e.target.value;

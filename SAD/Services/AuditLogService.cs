@@ -49,7 +49,7 @@ namespace SAD.Services
         public IQueryable<AuditLog> GetAll(AuditLogFilterParams queryParams)
         {
 
-            var query = _auditLogRepository.GetAll();
+            var query = GetAll();
             if (bool.TryParse(queryParams.Result, out var result))
             {
                 query = query.Where(log => log.Result == result);

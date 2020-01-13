@@ -61,7 +61,7 @@ export class CardFormComponent implements OnInit {
 
   initForm(card?: Card) {
     this.form = new FormGroup({
-      id: new FormControl(card ? card.id : ''),
+      id: new FormControl(card ? card.id : null),
       serialNumber: new FormControl(card ? card.serialNumber : '', Validators.required),
       cardOwnerId: new FormControl(card ? card.cardOwnerId : null, Validators.required)
     });

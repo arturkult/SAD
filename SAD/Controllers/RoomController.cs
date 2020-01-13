@@ -74,5 +74,19 @@ namespace SAD.Controllers
             _hubContext.Clients.All.SendAsync("live", vm);
             return result ? Ok() : (IActionResult)Unauthorized();
         }
+
+
+        [HttpGet("check")]
+        public IActionResult CheckAccessGET([FromQuery]RequestVM request)
+        {
+            var result = _roomService.CheckAccess(request);
+            var auditLog = _auditLogService.Add(
+                request.CardSerialNumber,
+                request.RoomNumber,
+                result);
+            var vm = _mapper.Map<AuditLogVM>(auditLog);
+            _hubContext.Clients.All.SendAsync("live", vm);
+            return result ? Ok() : (IActionResult)Unauthorized();
+        }
     }
 }
